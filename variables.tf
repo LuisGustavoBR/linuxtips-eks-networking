@@ -11,8 +11,8 @@ variable "profile" {
 }
 
 variable "vpc_cidr" {
-  type    = string
-  default = "Main CIDR of the VPC"
+  type        = string
+  description = "Main CIDR of the VPC"
 }
 
 variable "vpc_additional_cidrs" {
@@ -32,6 +32,16 @@ variable "public_subnets" {
 
 variable "private_subnets" {
   description = "List of VPC Private Subnets"
+  type = list(object({
+    name              = string
+    cidr              = string
+    availability_zone = string
+  }))
+}
+
+variable "database_subnets" {
+  description = "List of VPC Database Subnets"
+  default     = []
   type = list(object({
     name              = string
     cidr              = string
